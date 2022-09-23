@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pluviomètre</string>
+    <string name="mm">mm</string>
+    <string name="button_to_stats">Button to stats</string>
+    <string name="raindrop_image">Raindrop image</string>
+    <string name="date">Date</string>
+    <string name="rain">rain</string>
+    <string name="ajouter">Ajouter</string>
+</resources>
