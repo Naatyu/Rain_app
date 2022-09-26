@@ -1,7 +1,7 @@
 # Rain gauge app
  Simplistic application allowing to save rain records. If you want to try, APK is in ```app/debug``` (require android 5.0 (API level 21) or newer). If you find bugs, please create a GitHub issue so I can fix it. Any contribution is also welcome. The current app language is French.
 <br><br>
-<img src="Images/home_app.jpg" width="50"/><img src="Images/stats_app.jpg" width="50"/>
+<img src="Images/home_app.jpg" width="200"/><img src="Images/stats_app.jpg" width="200"/>
 <br><br>
 For the moment it is not planned to deploy this application on the Google Play Store because it was created mainly for personal use.
 
