@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     Cursor readAllData() {
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + DATE + " DESC";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -83,14 +83,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     String getRainMonth(){
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
         Date date = new Date(System.currentTimeMillis());
         String currentmthyr = formatter.format(date);
 
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT SUM("+RAINVALUE+") " +
                        "FROM "+TABLE_NAME+
-                       " WHERE substr("+DATE+", 4) = "+'"'+currentmthyr+'"';
+                       " WHERE substr("+DATE+", 1, 7) = "+'"'+currentmthyr+'"';
 
         Cursor cursor = null;
         cursor = db.rawQuery(query, null);

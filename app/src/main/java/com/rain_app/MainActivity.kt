@@ -1,15 +1,10 @@
 package com.rain_app
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -18,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,13 +35,17 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        var valueview = findViewById<RecyclerView>(R.id.valueview);
-        var editdate = findViewById<EditText>(R.id.editDate);
-        var editrainnum = findViewById<EditText>(R.id.editRainnum);
-        rainsumtext = findViewById<TextView>(R.id.Rainsum) as TextView
+        val valueview = findViewById<RecyclerView>(R.id.valueview);
+        val pickdate = findViewById<DatePicker>(R.id.pickDate);
+        val editrainnum = findViewById<EditText>(R.id.editRainnum);
+        var displaymonth = findViewById<TextView>(R.id.displaymonth);
+        val rainsumtext = findViewById<TextView>(R.id.Rainsum);
 
-        var currentDate = SimpleDateFormat("dd/MM/yyyy")
-        editdate.setText(currentDate.format(Date()))
+        val monthFormat = SimpleDateFormat("MMMM", Locale.FRANCE)
+        val month = Date()
+        displaymonth.text = "durant le mois de "+monthFormat.format(month)
+
+
 
         valueview.adapter = customAdapter;
         valueview.layoutManager = LinearLayoutManager(this@MainActivity);
@@ -61,17 +59,28 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        var buttonaddrain = findViewById<Button>(R.id.buttonaddrain);
+        val buttonaddrain = findViewById<Button>(R.id.buttonaddrain);
         buttonaddrain.setOnClickListener{
-            myDB.addValue(editdate.text.toString().trim(),
+            val day = pickdate.dayOfMonth;
+            val month = pickdate.month;
+            val year = pickdate.year;
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, day)
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val datefrompicker = dateFormat.format(calendar.time)
+
+            myDB.addValue(datefrompicker,
                           Integer.valueOf(editrainnum.text.toString().trim()));
-            var cursor = myDB.readAllData();
+            val cursor = myDB.readAllData();
             cursor.moveToLast()
             id.add(cursor.getString(0));
             date.add(cursor.getString(1));
             rainvalue.add(cursor.getString(2));
 
-            var rainsum = myDB.getRainMonth();
+            customAdapter.notifyDataSetChanged()
+
+            val rainsum = myDB.getRainMonth();
             rainsumtext.text = rainsum;
         }
 
@@ -98,7 +107,8 @@ class MainActivity : AppCompatActivity() {
 
         object : ItemTouchHelper.SimpleCallback(
             0,
-            ItemTouchHelper.RIGHT,) {
+            ItemTouchHelper.RIGHT,
+        ) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: ViewHolder, target: ViewHolder

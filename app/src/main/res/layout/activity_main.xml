@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0377A5"
+    android:background="@drawable/rain_back"
+    android:backgroundTint="#50000000"
+    android:backgroundTintMode="src_over"
     tools:context=".MainActivity">
 
     <ImageButton
@@ -12,15 +14,15 @@
         android:layout_width="51dp"
         android:layout_height="49dp"
         android:background="?android:selectableItemBackground"
+        android:contentDescription="@string/button_to_stats"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.977"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/stats"
-        android:contentDescription="@string/button_to_stats" />
+        app:layout_constraintVertical_bias="0.008"
+        app:srcCompat="@drawable/stats" />
 
     <TextView
         android:id="@+id/Rainsum"
@@ -38,20 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.586" />
-
-    <ImageView
-        android:id="@+id/imgrain"
-        android:layout_width="64dp"
-        android:layout_height="63dp"
-        android:contentDescription="@string/raindrop_image"
-        app:layout_constraintBottom_toTopOf="@+id/hsep1"
-        app:layout_constraintEnd_toStartOf="@+id/Rainsum"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598"
-        app:srcCompat="@drawable/drop__1_" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
         android:id="@+id/textmm"
@@ -67,91 +56,119 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/hsep1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toEndOf="@+id/Rainsum"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.662" />
+        app:layout_constraintVertical_bias="0.507" />
+
+    <ImageView
+        android:id="@+id/imgrain"
+        android:layout_width="67dp"
+        android:layout_height="73dp"
+        android:contentDescription="@string/raindrop_image"
+        app:layout_constraintBottom_toTopOf="@+id/hsep1"
+        app:layout_constraintEnd_toStartOf="@+id/Rainsum"
+        app:layout_constraintHorizontal_bias="0.791"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.305"
+        app:srcCompat="@drawable/raindrop" />
 
     <View
         android:id="@+id/hsep1"
         android:layout_width="360dp"
         android:layout_height="3dp"
+        android:layout_marginTop="168dp"
         android:background="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/valueview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.947" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/hsep2"
         android:layout_width="360dp"
         android:layout_height="3dp"
+        android:layout_marginTop="148dp"
         android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.847" />
+        app:layout_constraintTop_toBottomOf="@+id/hsep1" />
 
     <EditText
         android:id="@+id/editRainnum"
-        android:layout_width="158dp"
+        android:layout_width="106dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/white"
         android:ems="10"
-        android:hint="Pluie tombé (mm)"
+        android:hint="Pluie (mm)"
         android:inputType="number"
-        android:textColorHint="@color/white"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/hsep2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.983" />
+        app:layout_constraintVertical_bias="0.696" />
 
-    <EditText
-        android:id="@+id/editDate"
-        android:layout_width="158dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@color/white"
-        android:ems="10"
-        android:hint="Date (jj/mm/yyyy)"
-        android:inputType="date"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <DatePicker
+        android:id="@+id/pickDate"
+        android:layout_width="244dp"
+        android:layout_height="147dp"
+        android:calendarTextColor="@color/white"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintBottom_toTopOf="@+id/hsep2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintTop_toBottomOf="@+id/hsep1"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonaddrain"
-        android:layout_width="105dp"
+        android:layout_width="106dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/white"
         android:text="@string/ajouter"
         android:textColor="#0377A5"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/hsep2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
+        app:layout_constraintTop_toBottomOf="@+id/editRainnum"
+        app:layout_constraintVertical_bias="0.395" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/valueview"
-        android:layout_width="293dp"
-        android:layout_height="375dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="352dp"
+        android:layout_height="437dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.646" />
+        app:layout_constraintTop_toBottomOf="@+id/hsep2" />
+
+    <TextView
+        android:id="@+id/displaymonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:shadowColor="@color/black"
+        android:shadowDx="5"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:text="durant le mois de"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/hsep1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Rainsum"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
