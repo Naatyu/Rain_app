@@ -1,3 +1,1 @@
--ajout du mois actuel en dessous du toal pluie
--mise a jour de la vue quand bouton ajouter
 -diagramme valeurs à l'année fixe avec possibilité sélection année + total pluie année et moyen pluie par mois

@@ -17,4 +17,4 @@ This application has been developed under android studio. It is currently a mix 
 ## Current features/bug and upcoming features
 | Current Features | Bugs | Upcoming Features |
 | :-------------- |:----|:-----------------|
-| <ul><li>Saving of rainfall data</li><li>Swipe to delete data</li></ul> | <ul><li>If you enter a value and then click add on the keypad, if you then click on the add button, the view is not updated.</li></ul> | <ul><li>Sort value by date</li><li>Display the current month under the total rainfall value</li><li>Graph showing total rainfall value for the last 12 month</li></ul> |
+| <ul><li>Saving of rainfall data</li><li>Swipe to delete data</li></ul> | <ul><li>No bug known for the moment.</li></ul> | <ul><li>Graph showing total rainfall value for the last 12 month</li></ul> |
