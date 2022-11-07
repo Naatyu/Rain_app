@@ -73,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     void deleteOneRow(String row_id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        System.out.println(row_id);
+        System.out.println("Received row id : "+row_id);
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
         if (result == -1){
             Toast.makeText(context, "Erreur de suppression", Toast.LENGTH_SHORT).show();

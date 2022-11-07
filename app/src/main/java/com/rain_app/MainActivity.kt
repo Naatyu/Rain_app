@@ -1,6 +1,7 @@
 package com.rain_app
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
@@ -22,8 +23,7 @@ class MainActivity : AppCompatActivity() {
     var rainvalue = ArrayList<String>();
     var id = ArrayList<String>();
     var customAdapter = CustomAdapter(this@MainActivity, date, rainvalue);
-
-    private lateinit var rainsumtext: TextView;
+    var rainsumtext: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val valueview = findViewById<RecyclerView>(R.id.valueview);
+        var valueview = findViewById<RecyclerView>(R.id.valueview);
         val pickdate = findViewById<DatePicker>(R.id.pickDate);
         val editrainnum = findViewById<EditText>(R.id.editRainnum);
         var displaymonth = findViewById<TextView>(R.id.displaymonth);
-        val rainsumtext = findViewById<TextView>(R.id.Rainsum);
+        rainsumtext = findViewById<TextView>(R.id.Rainsum);
 
         val monthFormat = SimpleDateFormat("MMMM", Locale.FRANCE)
         val month = Date()
@@ -51,6 +51,11 @@ class MainActivity : AppCompatActivity() {
         valueview.layoutManager = LinearLayoutManager(this@MainActivity);
         customAdapter.notifyDataSetChanged();
         mIth.attachToRecyclerView(valueview);
+
+        storeDataInArrays()
+
+        var rainsum = myDB.getRainMonth();
+        rainsumtext?.text = rainsum;
 ;
         val StatsButton = findViewById<ImageButton>(R.id.StatsButton)
         StatsButton.setOnClickListener{
@@ -70,24 +75,29 @@ class MainActivity : AppCompatActivity() {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             val datefrompicker = dateFormat.format(calendar.time)
 
-            myDB.addValue(datefrompicker,
-                          Integer.valueOf(editrainnum.text.toString().trim()));
-            val cursor = myDB.readAllData();
-            cursor.moveToLast()
-            id.add(cursor.getString(0));
-            date.add(cursor.getString(1));
-            rainvalue.add(cursor.getString(2));
+            if (editrainnum.text.toString() != "") {
+                myDB.addValue(
+                    datefrompicker,
+                    Integer.valueOf(editrainnum.text.toString().trim())
+                );
+            }
+            /* Move to newest ID value to get data that was just added*/
+            val db: SQLiteDatabase = myDB.getReadableDatabase()
+            val cursor = db.rawQuery("SELECT * FROM my_values WHERE _id = (SELECT MAX(_id) FROM my_values)", null)
 
+            date = ArrayList<String>();
+            rainvalue = ArrayList<String>();
+            id = ArrayList<String>();
+
+            storeDataInArrays()
+            customAdapter = CustomAdapter(this@MainActivity, date, rainvalue);
+            valueview.adapter = customAdapter;
             customAdapter.notifyDataSetChanged()
 
             val rainsum = myDB.getRainMonth();
-            rainsumtext.text = rainsum;
+            rainsumtext?.text = rainsum;
         }
 
-        storeDataInArrays()
-
-        var rainsum = myDB.getRainMonth();
-        rainsumtext.text = rainsum;
     }
 
     private fun storeDataInArrays(){
@@ -133,8 +143,8 @@ class MainActivity : AppCompatActivity() {
             db.deleteOneRow(id[viewHolder.adapterPosition]);
             id.removeAt(viewHolder.adapterPosition);
             customAdapter.notifyDataSetChanged();
-            var rainsum = db.getRainMonth();
-            rainsumtext.text = rainsum;
+            var rainsum = db.rainMonth;
+            rainsumtext?.text = rainsum;
         }
         builder.setNegativeButton("Non") { dialog, which ->
             customAdapter.notifyDataSetChanged()
