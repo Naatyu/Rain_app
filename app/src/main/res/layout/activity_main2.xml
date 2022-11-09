@@ -4,20 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0377A5"
+    android:background="@drawable/rain_back"
+    android:backgroundTint="#50000000"
+    android:backgroundTintMode="src_over"
     tools:context=".MainActivity2">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stats"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
 
     <ImageButton
         android:id="@+id/HomeButton"
@@ -32,5 +22,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01"
         app:srcCompat="@drawable/home" />
+
+    <Spinner
+        android:id="@+id/annee"
+        android:layout_width="104dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:spinnerMode="dropdown"
+        android:popupBackground="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
