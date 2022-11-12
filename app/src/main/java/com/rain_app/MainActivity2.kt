@@ -12,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -40,7 +41,7 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         val barview = findViewById<HorizontalBarChart>(R.id.barchart)
-        
+        val anneeTotal = findViewById<TextView>(R.id.totalannee)
         val HomeButton = findViewById<ImageButton>(R.id.HomeButton)
         val dropButton = findViewById<Spinner>(R.id.annee)
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
@@ -60,22 +61,50 @@ class MainActivity2 : AppCompatActivity() {
                 id: Long
             ) {
                 val item = parent.getItemAtPosition(position)
-                val month_data = ArrayList<BarEntry>();
                 var db: SQLiteDatabase = myDB.readableDatabase
+
+                val cursor = db.rawQuery(
+                    "SELECT SUM(rain_value) " +
+                            "FROM my_values " +
+                            "WHERE substr(date,1,4) == "+'"'+item+'"', null)
+                while (cursor.moveToNext()) {
+                    if (cursor.getString(0) == null) {
+                        anneeTotal.text = "Pluviométrie de "+item+" : 0 mm"
+                    } else {
+                        anneeTotal.text = "Pluviométrie "+item+" : "+cursor.getString(0)+" mm"
+                    }
+                }
+
+                val month_data = ArrayList<BarEntry>();
                 var month_pos = 11
 
                 for (month in 1..12){
-                    val cursor = db.rawQuery(
-                        "SELECT SUM(rain_value) " +
-                            "FROM my_values " +
-                            "WHERE substr(date,1,7) == "+'"'+item+'-'+month+'"', null)
-                    while (cursor.moveToNext()){
-                        if (cursor.getString(0) == null){
-                            month_data.add(BarEntry((month_pos).toFloat(), 0f))
-                        } else {
-                            month_data.add(BarEntry((month_pos).toFloat(), cursor.getFloat(0)))
+                    if (month < 10){
+                        val cursor = db.rawQuery(
+                            "SELECT SUM(rain_value) " +
+                                    "FROM my_values " +
+                                    "WHERE substr(date,1,7) == "+'"'+item+"-0"+month+'"', null)
+                        while (cursor.moveToNext()){
+                            if (cursor.getString(0) == null){
+                                month_data.add(BarEntry((month_pos).toFloat(), 0f))
+                            } else {
+                                month_data.add(BarEntry((month_pos).toFloat(), cursor.getFloat(0)))
+                            }
+                        }
+                    } else {
+                        val cursor = db.rawQuery(
+                            "SELECT SUM(rain_value) " +
+                                    "FROM my_values " +
+                                    "WHERE substr(date,1,7) == "+'"'+item+'-'+month+'"', null)
+                        while (cursor.moveToNext()){
+                            if (cursor.getString(0) == null){
+                                month_data.add(BarEntry((month_pos).toFloat(), 0f))
+                            } else {
+                                month_data.add(BarEntry((month_pos).toFloat(), cursor.getFloat(0)))
+                            }
                         }
                     }
+
                     month_pos -= 1
                 }
 

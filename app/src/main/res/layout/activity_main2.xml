@@ -37,10 +37,27 @@
         android:id="@+id/barchart"
         android:layout_width="387dp"
         android:layout_height="639dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/annee" />
+
+    <TextView
+        android:id="@+id/totalannee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:shadowColor="@color/black"
+        android:shadowDx="5"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:text="Total année"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/barchart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

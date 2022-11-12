@@ -129,8 +129,8 @@
 
     <Button
         android:id="@+id/buttonaddrain"
-        android:layout_width="106dp"
-        android:layout_height="48dp"
+        android:layout_width="112dp"
+        android:layout_height="51dp"
         android:backgroundTint="@color/white"
         android:text="@string/ajouter"
         android:textColor="#0377A5"
