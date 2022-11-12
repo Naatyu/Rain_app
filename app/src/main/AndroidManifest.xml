@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rain_app"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity2"
             android:exported="false">

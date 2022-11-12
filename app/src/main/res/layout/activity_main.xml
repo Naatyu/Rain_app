@@ -33,7 +33,7 @@
         android:shadowDx="5"
         android:shadowDy="10"
         android:shadowRadius="16"
-        android:text="80"
+        android:text="0"
         android:textColor="@color/white"
         android:textSize="75sp"
         app:layout_constraintBottom_toTopOf="@+id/hsep1"

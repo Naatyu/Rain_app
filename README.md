@@ -17,4 +17,4 @@ This application has been developed under android studio. It is currently a mix 
 ## Current features/bug and upcoming features
 | Current Features | Bugs | Upcoming Features |
 | :-------------- |:----|:-----------------|
-| <ul><li>Saving of rainfall data</li><li>Swipe to delete data</li></ul> | <ul><li>No bug known for the moment.</li></ul> | <ul><li>Graph showing total rainfall value for the last 12 month</li></ul> |
+| <ul><li>Saving of rainfall data</li><li>Swipe to delete data</li><li>Graph showing total rainfall value for each month for each year</li></ul> | <ul><li>No bug known for the moment.</li></ul> | <ul><li>Feel free to suggest new features !</li></ul> |

@@ -1,1 +1,0 @@
--diagramme valeurs à l'année fixe avec possibilité sélection année + total pluie année et moyen pluie par mois
