@@ -109,7 +109,11 @@ class MainActivity : AppCompatActivity() {
         }else{
             while (cursor.moveToNext()){
                 id.add(cursor.getString(0));
-                date.add(cursor.getString(1));
+                val dateview = SimpleDateFormat("yyyy-MM-dd")
+                val newdateview = SimpleDateFormat("dd-MM-yyyy")
+                val dateshow = dateview.parse(cursor.getString(1))
+                val formated_date = newdateview.format(dateshow)
+                date.add(formated_date)
                 rainvalue.add(cursor.getString(2));
             }
         }
@@ -139,6 +143,8 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("Suppresion")
         builder.setMessage("Supprimer cette valeur : ${rainvalue[viewHolder.adapterPosition]} mm du ${date[viewHolder.adapterPosition]} ?")
         builder.setPositiveButton("Oui") { dialog, which ->
+            println(date)
+            println(viewHolder.adapterPosition)
             date.removeAt(viewHolder.adapterPosition);
             rainvalue.removeAt(viewHolder.adapterPosition);
             var db = DatabaseHelper(this@MainActivity);
